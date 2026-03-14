@@ -4,7 +4,7 @@ A simple, static informational page explaining the difference between Claude Cod
 
 ## Live Site
 
-Deployed on Vercel — see the deployment URL in your Vercel dashboard.
+https://claude-code-vs-chat-liart.vercel.app/
 
 ## Local Development
 
