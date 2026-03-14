@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Code vs Claude Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:       #7c3aed;
+      --purple-light: #f5f0ff;
+      --lavender:     #a78bfa;
+      --text-dark:    #1a1a2e;
+      --text-mid:     #4b5563;
+      --border:       #e5e7eb;
+      --bg:           #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--purple);
+      color: #fff;
+      text-align: center;
+      padding: 2.5rem 1.5rem 2rem;
+    }
+    header .brand {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 0.75rem;
+    }
+    header h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    header p.subtitle {
+      font-size: 1.05rem;
+      opacity: 0.85;
+    }
+
+    /* ── Main container ── */
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── Hero intro ── */
+    .hero {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3rem;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+    }
+    .hero strong {
+      color: var(--text-dark);
+    }
+
+    /* ── Comparison grid ── */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 640px) {
+      .comparison { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .card-header {
+      padding: 1.25rem 1.5rem;
+      border-top: 4px solid var(--card-accent);
+      background: var(--purple-light);
+    }
+    .card--code  { --card-accent: var(--purple); }
+    .card--chat  { --card-accent: var(--lavender); }
+
+    .card-header h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+    .card-header .tagline {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+    }
+
+    .card-body {
+      padding: 0;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .row:last-child { border-bottom: none; }
+
+    .row-label {
+      padding: 1rem 1rem 1rem 1.5rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-mid);
+      background: #fafafa;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      padding-top: 1.1rem;
+    }
+
+    .row-value {
+      padding: 1rem 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .examples {
+      list-style: none;
+      margin-top: 0.4rem;
+    }
+    .examples li {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      font-style: italic;
+      padding: 0.15rem 0;
+    }
+    .examples li::before {
+      content: '"';
+    }
+    .examples li::after {
+      content: '"';
+    }
+
+    /* ── Summary callout ── */
+    .callout {
+      background: var(--purple-light);
+      border-left: 4px solid var(--purple);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      border-top: 1px solid var(--border);
+    }
+    footer a {
+      color: var(--purple);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">Anthropic</div>
+    <h1>Claude Code vs Claude Chat</h1>
+    <p class="subtitle">Two products, one AI — understanding the difference</p>
+  </header>
+
+  <main>
+    <div class="hero">
+      <p>
+        Claude is an AI assistant made by Anthropic. It comes in two forms designed for different contexts:
+        <strong>Claude Chat</strong> is a conversational interface anyone can use in a browser or app,
+        while <strong>Claude Code</strong> is a developer tool that lives in your terminal and works
+        directly inside your codebase.
+      </p>
+    </div>
+
+    <div class="comparison">
+
+      <!-- Claude Code -->
+      <div class="card card--code">
+        <div class="card-header">
+          <h2>Claude Code</h2>
+          <div class="tagline">For developers &amp; engineers</div>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="row-label">What it is</div>
+            <div class="row-value">A command-line AI coding assistant</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Who it's for</div>
+            <div class="row-value">Developers and software engineers</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">How to access</div>
+            <div class="row-value">Terminal / command line (CLI tool)</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">What you do</div>
+            <div class="row-value">Write, edit, debug, and refactor code in your actual project files</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Key strengths</div>
+            <div class="row-value">Reads your codebase, runs commands, edits files autonomously</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Examples</div>
+            <div class="row-value">
+              <ul class="examples">
+                <li>Fix the bug in my app</li>
+                <li>Add tests to this file</li>
+                <li>Refactor this function</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Claude Chat -->
+      <div class="card card--chat">
+        <div class="card-header">
+          <h2>Claude Chat</h2>
+          <div class="tagline">For everyone</div>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="row-label">What it is</div>
+            <div class="row-value">A conversational AI assistant</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Who it's for</div>
+            <div class="row-value">Anyone — students, writers, professionals, curious people</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">How to access</div>
+            <div class="row-value">Browser at claude.ai or mobile app</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">What you do</div>
+            <div class="row-value">Chat, ask questions, brainstorm, summarize, draft content</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Key strengths</div>
+            <div class="row-value">Natural conversation, broad knowledge, creative tasks</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Examples</div>
+            <div class="row-value">
+              <ul class="examples">
+                <li>Explain quantum computing</li>
+                <li>Write me an email</li>
+                <li>What's the difference between X and Y?</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /.comparison -->
+
+    <div class="callout">
+      Both are powered by the same Claude AI — the difference is <strong>where</strong> and <strong>how</strong> you use it.
+    </div>
+
+  </main>
+
+  <footer>
+    Made with Claude &mdash; <a href="https://anthropic.com" target="_blank" rel="noopener">anthropic.com</a>
+  </footer>
+
+</body>
+</html>
